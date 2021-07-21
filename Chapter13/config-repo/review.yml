@@ -11,6 +11,13 @@ spring.datasource:
 
 spring.datasource.hikari.initializationFailTimeout: 60000
 
+spring.rabbitmq:
+  host: 127.0.0.1
+  port: 5672
+  username: guest
+  password: guest
+
+
 spring.cloud.stream:
   defaultBinder: rabbit
   default.contentType: application/json

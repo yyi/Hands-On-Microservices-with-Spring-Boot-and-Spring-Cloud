@@ -18,7 +18,7 @@ spec:
       - path: /product-composite
         backend:
           serviceName: product-composite
-          servicePort: 80        
+          servicePort: 80
       - path: /actuator/health
         backend:
           serviceName: product-composite

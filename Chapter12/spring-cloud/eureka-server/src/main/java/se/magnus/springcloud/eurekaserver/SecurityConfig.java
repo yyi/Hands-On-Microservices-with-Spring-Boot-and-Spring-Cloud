@@ -17,8 +17,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
     public SecurityConfig(
-        @Value("${app.eureka-username}") String username,
-        @Value("${app.eureka-password}") String password
+        @Value("${app.eureka-username:u}") String username,
+        @Value("${app.eureka-password:p}") String password
     ) {
         this.username = username;
         this.password = password;
