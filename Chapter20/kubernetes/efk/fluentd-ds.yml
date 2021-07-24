@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: fluentd
@@ -7,12 +7,17 @@ metadata:
     app: fluentd
     version: v1
 spec:
+  selector:
+    matchLabels:
+      app: fluentd
   template:
     metadata:
       labels:
         app: fluentd
         version: v1
     spec:
+      serviceAccount: fluentd-service-account
+      serviceAccountName: fluentd-service-account
       tolerations:
       - key: node-role.kubernetes.io/master
         effect: NoSchedule
@@ -20,6 +25,10 @@ spec:
       - name: fluentd
         image: hands-on/fluentd:v1
         env:
+          - name: K8S_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
           - name:  FLUENT_ELASTICSEARCH_HOST
             value: "elasticsearch.logging"
           - name:  FLUENT_ELASTICSEARCH_PORT
